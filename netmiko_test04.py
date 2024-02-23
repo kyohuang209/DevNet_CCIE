@@ -63,4 +63,3 @@ if __name__ == "__main__":
         output = ssh_connect(device_info)
         analyzer(output)
 
-print(:"this is test output")
