@@ -62,4 +62,5 @@ if __name__ == "__main__":
         modify_device_type(device_info, device_type)
         output = ssh_connect(device_info)
         analyzer(output)
-    
+
+print(:"this is test output")
