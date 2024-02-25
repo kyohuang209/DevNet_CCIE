@@ -1,4 +1,4 @@
-# 批量的解析设备, 并处理异常中断的处理
+# 批量的解析设备, 并处理异常中断的处理.  ++多线程
 
 from netmiko import ConnectHandler
 from netmiko import SSHDetect
@@ -7,6 +7,8 @@ from netmiko import NetmikoAuthenticationException
 from netmiko.exceptions import NetmikoBaseException
 import re
 
+from threading import Thread
+from queue import Queue
 
 #define device_info
 def get_device_info(ipaddr, username, password):
@@ -66,7 +68,8 @@ def analyzer(output, device_info):
     print('='*30,f'Device {device_info["ip"]} analysis done','='*30,'\n')
     print(f"This 'Authentication failed' issue matched {match} times",'\n')
 
-def exec_cap_logging(device):
+#根据队列信息做修改
+def exec_cap_logging(device, output_q):
     device_info = get_device_info(device[0], device[1], device[2])
     device_type = detect_device(device_info)
     if device_type != "error":
@@ -75,15 +78,20 @@ def exec_cap_logging(device):
         analyzer(output,device_info)
      
 
-
+#修改循环， 加入多线程
 if __name__ == "__main__":
-
+    threads = []   #定义空列表给多线程用
     with open("device_info01.txt", "r") as f:
         str1 = f.read()
         devices = str1.split("\n")
 
         for device in devices:
             device = device.split(" ")
-            exec_cap_logging(device)
+            #exec_cap_logging(device)
 
+            thread_1 = Thread(target=exec_cap_logging, args=(device,Queue()))
+            thread_1.start()
+            threads.append(thread_1)
 
+        for thread in threads:
+            thread.join()
