@@ -1,9 +1,9 @@
-module access-service{
+module access-service {
     container access-service {
         key device;
         list device {
-            type: string
-            path: /ncs:devices/device/name
+            type string;
+            path /ncs:devices/device/name;
     
         }
         list networks {
@@ -27,8 +27,8 @@ module access-service{
                 type string;
             }
             leaf network {
-                type leafref
-                    path "../../networks/name
+                type leafref;
+                    path "../../networks/name;
             }
         }
     }
