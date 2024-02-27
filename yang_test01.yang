@@ -1,4 +1,5 @@
 module access-service {
+
     container access-service {
         key device;
         list device {
@@ -28,7 +29,7 @@ module access-service {
             }
             leaf network {
                 type leafref;
-                    path "../../networks/name;
+                path "../../networks/name";
             }
         }
     }
