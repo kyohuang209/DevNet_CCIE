@@ -1,0 +1,36 @@
+module access-service{
+    container access-service {
+        key device;
+        list device {
+            type: string
+            path: /ncs:devices/device/name
+    
+        }
+        list networks {
+            key name;
+            leaf name {
+                type string;
+            }
+            leaf network-id {
+                type uint16;
+            }
+            leaf prefix {
+                type inet:ipv4-prefix;
+            }
+            leaf description {
+                type string;
+            }
+        }
+        list access-ports {
+            key name;
+            leaf name {
+                type string;
+            }
+            leaf network {
+                type leafref
+                    path "../../networks/name
+            }
+        }
+    }
+}
+    
