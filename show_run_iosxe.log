@@ -1,0 +1,832 @@
+ISR4K11#show run    
+Building configuration...
+
+Current configuration : 20907 bytes
+!
+! Last configuration change at 11:07:41 GMT Mon Mar 4 2024
+!
+version 17.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service internal
+service sequence-numbers
+service call-home
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+!
+hostname ISR4K11
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+card type e1 0 1
+no logging queue-limit
+logging buffered 30000000
+no logging rate-limit
+enable password Cisco.123
+!
+no aaa new-model
+clock timezone GMT 8 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip host cm85che.uc.dc.com 10.124.56.85
+ip name-server 10.124.56.32
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+!         
+multilink bundle-name authenticated
+no device-tracking logging theft
+!
+!
+!
+!
+!
+!
+!
+isdn switch-type primary-4ess
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment terminal
+ revocation-check crl
+!
+crypto pki trustpoint CUBEtest
+ revocation-check crl
+!
+crypto pki trustpoint twtpenhb13vg01
+ enrollment selfsigned
+ serial-number none
+ fqdn none
+ ip-address none
+ subject-name CN=twtpenhb13vg01
+ revocation-check none
+ rsakeypair twtpenhb13vg01 1024
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+        quit
+crypto pki certificate chain CUBEtest
+crypto pki certificate chain twtpenhb13vg01
+ certificate self-signed 01
+  308201FB 30820164 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  19311730 15060355 0403130E 74777470 656E6862 31337667 3031301E 170D3233 
+  30333231 30393030 34345A17 0D333330 33323030 39303034 345A3019 31173015 
+  06035504 03130E74 77747065 6E686231 33766730 3130819F 300D0609 2A864886 
+  F70D0101 01050003 818D0030 81890281 8100B709 10C4144D 55520977 DA89EB5F 
+  D23E7E86 07076B69 AE59DE87 098A7B2F E93CFD97 E54A2F62 55D58BCD BFCD1505 
+  31D17AB9 34045CF3 27178ED5 139C1C8A 291D15AE CADEEFE2 8CAB5C1A 44620441 
+  DC0E778D 72A65EA1 09412169 BE7F926E ADC99AE3 F8293BB9 00C65559 62300D16 
+  CCDC4E44 8763FD9B 6444FAC9 B8FE7609 AB270203 010001A3 53305130 0F060355 
+  1D130101 FF040530 030101FF 301F0603 551D2304 18301680 148731DB 12B3C7BC 
+  70DC5A4B D2CD5A95 D1E5E132 0C301D06 03551D0E 04160414 8731DB12 B3C7BC70 
+  DC5A4BD2 CD5A95D1 E5E1320C 300D0609 2A864886 F70D0101 05050003 81810018 
+  736CFD4D C530AC1C 53770C8C 5C86C212 8EA34487 557CCEF6 76E56F61 FC1A86A6 
+  ADF2E02E D46955E1 DFFC7B98 D1FBEB33 D7AC9401 93BC8EAD CD15052B 27F63ED9 
+  6E118B7B 374C8DF0 C52CB0FA 364DEF68 EF0BB87E 7C350194 1A050CB3 71BD4B90 
+  9A7FD6EF 822542E7 E8ECA246 BA79A888 EA3CA532 C7AA2CFA 15D11D00 4F4B95
+        quit
+!
+crypto pki certificate pool
+ cabundle nvram:ios_core.p7b
+!
+!
+!
+!
+voice service voip
+ no ip address trusted authenticate
+ callmonitor
+ no callmonitor trace
+ rtcp all-pass-through
+ rtp-port range 16384 32766
+ mode border-element
+ media statistics
+ media bulk-stats
+ allow-connections h323 to h323
+ allow-connections h323 to sip
+ allow-connections sip to h323
+ allow-connections sip to sip
+ fax protocol t38 version 0 ls-redundancy 0 hs-redundancy 0 fallback pass-through g711ulaw
+ h323
+  h225 h245-address on-alert
+ trace
+ call-quality
+ sip
+  session transport tcp
+  session refresh
+  error-passthru
+  registrar server expires max 600 min 60
+  pass-thru subscribe-notify-events all
+  send 180 sdp
+!
+!
+voice class uri options sip
+ host ipv4:10.124.56.105
+ host ipv4:10.124.56.106
+ host ipv4:10.124.57.13
+voice class codec 7
+ codec preference 1 g711alaw
+ codec preference 2 g711ulaw
+!
+!
+voice class sip-profiles 2
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\+(.*)@" "sip:\1@" 
+ request ANY sip-header From modify "sip:\*(.*)@" "sip:\1@" 
+!
+voice class sip-profiles 1
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+ request INVITE sip-header SIP-Req-URI modify "sip:@.*;" "" 
+!
+!
+!
+voice class custom-cptone test1
+!
+voice class custom-cptone 1213
+!
+voice class tenant 4000
+!
+!
+!
+voice register global
+ mode cme
+ source-address 10.124.42.11 port 5060
+ max-dn 100
+ max-pool 475
+ create profile sync 4510422924453086
+ calling-number local
+ auto-register
+ !
+!
+voice register dn  1
+ number 10022
+!
+voice register dn  2
+ number 10023
+!
+voice register dn  3
+ number 10024
+!
+voice register dn  4
+ number 10025
+!
+voice register dn  10
+!
+voice register pool  1
+ busy-trigger-per-button 2
+ id mac CC7F.758A.78A0
+ type 8851
+ number 1 dn 1
+ username che password Che123
+ codec g711ulaw
+!
+voice register pool  2
+ busy-trigger-per-button 1
+ id mac 94D4.690A.2E64
+ type 8845
+ number 1 dn 2
+ dtmf-relay rtp-nte
+ username che1 password Che123
+ codec g711ulaw
+!
+voice register pool  3
+ busy-trigger-per-button 1
+ id mac DCCE.C115.D739
+ type 8841
+ number 1 dn 3
+ dtmf-relay rtp-nte
+ username che3 password Che123
+ codec g711ulaw
+!
+voice register pool  4
+ busy-trigger-per-button 1
+ id mac 2C01.B5E4.B792
+ type 8865
+ number 1 dn 4
+ dtmf-relay rtp-nte
+ username che4 password Che123
+ codec g711ulaw
+!
+voice register pool  475
+ busy-trigger-per-button 1
+!
+voice hunt-group 4 sequential
+ final 2009
+ list 2009,10023
+ timeout 10 
+ pilot 1000 
+!
+!
+!
+voice translation-rule 1
+ rule 1 /906789/ /6789/
+!
+voice translation-rule 2
+ rule 1 /^8\(4...\)$/ /3812\0/
+ rule 10 /^\(.....\)$/ /38124000/
+!
+voice translation-rule 3
+ rule 1 /0\(.*\)/ /9\1/
+!
+voice translation-rule 5
+ rule 1 /^53399888/ /6000/
+!
+voice translation-rule 10
+ rule 1 /\+90212311/ /55791011/
+!
+voice translation-rule 11
+ rule 1 /20010/ /820010/
+!
+voice translation-rule 999
+ rule 2 /^[5-8]\(..\)/ /62601818/
+!
+!
+voice translation-profile 6789
+ translate called 1
+!
+voice translation-profile PSTNIN-AA
+ translate called 5
+!
+voice translation-profile test
+ translate calling 10
+!
+voice translation-profile testmgcp
+ translate calling 11
+!
+!
+!
+media service
+ !
+!
+application
+ service aa flash:ptc.tcl
+  param operator 9888
+  paramspace english index 1
+  paramspace english language en
+  param voice-mail 1234
+  paramspace english prefix en
+  param welcome-prompt ptc.au
+  param aa-pilot 6000
+ !
+!
+!
+!
+!
+voice-card 0/1
+ no watchdog
+!
+voice-card 0/2
+ no watchdog
+!
+voice-card 0/4
+ dsp services dspfarm
+ no watchdog
+!
+no license feature hseck9
+license udi pid ISR4451-X/K9 sn FOC20056JG3
+license accept end user agreement
+license boot suite FoundationSuiteK9
+license boot level uck9
+license smart url https://smartreceiver.cisco.com/licservice/license
+license smart url smart https://smartreceiver.cisco.com/licservice/license
+license smart transport callhome
+memory free low-watermark processor 69063
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+username admin privilege 15 password 0 cisco!123
+!
+redundancy
+ mode none
+ application redundancy
+  group 1
+   name test_redundancy1
+   preempt
+   priority 1 failover threshold 1
+!
+!
+!
+!
+!
+controller E1 0/1/0
+ framing no-crc4 
+ pri-group timeslots 1-31 service mgcp
+!
+controller E1 0/1/1
+ pri-group timeslots 1-31 service mgcp
+!
+!
+!
+!
+!
+translation-rule 11
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 10.124.42.11 255.255.255.0
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ ip address 10.127.255.70 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/3
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Service-Engine0/1/0
+!
+interface Serial0/1/0:15
+ no ip address
+ encapsulation hdlc
+ no cdp enable
+ isdn switch-type primary-net5
+ isdn incoming-voice voice
+ isdn bind-l3 ccm-manager
+ isdn send-alerting
+ isdn sending-complete
+!
+interface Serial0/1/1:15
+ no ip address
+ encapsulation hdlc
+ no cdp enable
+ isdn switch-type primary-net5
+ isdn incoming-voice voice
+ isdn bind-l3 ccm-manager
+!         
+interface Service-Engine0/2/0
+!
+interface Service-Engine0/4/0
+!
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ shutdown
+ negotiation auto
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip http secure-active-session-modules none
+ip http active-session-modules none
+ip forward-protocol nd
+ip tftp source-interface GigabitEthernet0/0/0
+ip route 0.0.0.0 0.0.0.0 10.124.42.1
+ip route 10.144.0.72 255.255.255.255 10.127.255.69
+ip scp server enable
+!
+!
+!
+logging trap debugging
+!
+!
+!
+!
+control-plane
+!
+!
+voice-port 0/1/0:15
+!
+voice-port 0/1/1:15
+!
+voice-port 0/2/0
+ echo-cancel coverage 24
+ cptone CN
+!
+voice-port 0/2/1
+!
+voice-port 0/2/2
+!
+voice-port 0/2/3
+!
+voice-port 0/2/4
+!
+voice-port 0/2/5
+!
+mgcp
+mgcp call-agent cm85che.uc.dc.com 2427 service-type mgcp version 0.1
+mgcp rtp unreachable timeout 1000 action notify
+mgcp modem passthrough voip mode nse
+mgcp package-capability rtp-package
+mgcp package-capability sst-package
+mgcp package-capability pre-package
+no mgcp package-capability res-package
+no mgcp timer receive-rtcp
+mgcp sdp simple
+mgcp fax t38 inhibit
+mgcp behavior rsip-range tgcp-only
+mgcp behavior comedia-role none
+mgcp behavior comedia-check-media-src disable
+mgcp behavior comedia-sdp-force disable
+!
+mgcp profile default
+!
+!
+ccm-manager music-on-hold
+!
+ccm-manager redundant-host cm86che.uc.dc.com
+ccm-manager mgcp
+no ccm-manager fax protocol cisco
+ccm-manager config server 10.124.56.85   
+ccm-manager config
+!
+telephony-service
+ max-ephones 100
+ max-dn 1000
+ ip source-address 10.124.42.11 port 2000
+ calling-number local
+ max-conferences 8 gain -6
+ transfer-system blind
+ create cnf-files version-stamp Jan 01 2002 00:00:00
+!
+!
+dspfarm profile 1 transcode  
+ codec g711ulaw
+ codec g729abr8
+ associate application CUBE
+ shutdown
+!
+dspfarm profile 5 transcode universal  
+ shutdown
+!
+dspfarm profile 999 mtp  
+ codec g711ulaw
+ shutdown
+!
+dial-peer voice 12 voip
+ destination-pattern 13052760750
+ session protocol sipv2
+ session target ipv4:10.144.0.72
+ session transport udp
+ voice-class sip bind control source-interface GigabitEthernet0/0/1
+ voice-class sip bind media source-interface GigabitEthernet0/0/1
+ dtmf-relay rtp-nte
+ codec g711alaw
+!
+dial-peer voice 11 voip
+ session protocol sipv2
+ incoming called-number .
+ voice-class sip pass-thru content unsupp
+ voice-class sip pass-thru content sdp
+ voice-class sip bind control source-interface GigabitEthernet0/0/0
+ voice-class sip bind media source-interface GigabitEthernet0/0/0
+ dtmf-relay rtp-nte
+ codec g711alaw
+!
+dial-peer voice 9 voip
+ destination-pattern 041139420450
+ session protocol sipv2
+ session target ipv4:10.124.42.109
+ dtmf-relay rtp-nte
+ codec g711alaw
+!
+dial-peer voice 8 voip
+ destination-pattern 88695
+ session protocol sipv2
+ session target ipv4:10.124.42.161
+ dtmf-relay rtp-nte
+ no vad
+!
+dial-peer voice 100 voip
+ session protocol sipv2
+ dtmf-relay h245-alphanumeric h245-signal
+!
+dial-peer voice 999 voip
+ no dtmf-interworking
+!
+dial-peer voice 44 voip
+ destination-pattern 397904..
+ session protocol sipv2
+ session target ipv4:10.70.72.3
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 1284 voip
+ answer-address *T
+ session protocol sipv2
+ voice-class sip profiles 2 inbound
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 1285 voip
+ session protocol sipv2
+ session target ipv4:10.124.56.85
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 1 voip
+!
+dial-peer voice 2 pots
+ pcm-dump caplog FFFF
+ translation-profile outgoing test
+!
+dial-peer voice 5 pots
+!
+dial-peer voice 2001 pots
+ translation-profile incoming 11
+ translation-profile outgoing 11
+ destination-pattern 2001
+ port 0/1/0:15
+ forward-digits all
+!
+dial-peer voice 1001 pots
+ destination-pattern 1001
+ port 0/1/0:15
+ forward-digits all
+!
+dial-peer voice 777 voip
+ destination-pattern 66665556
+ session protocol sipv2
+ session target ipv4:10.124.56.105:5060
+ dtmf-relay rtp-nte
+ codec g711alaw
+!
+dial-peer voice 53399888 voip
+ translation-profile incoming PSTNIN-AA
+ service aa
+ session protocol sipv2
+ session target ipv4:10.124.57.13:5060
+ incoming called-number 53399888
+ incoming uri from options
+ voice-class sip conn-reuse
+ voice-class sip early-offer forced
+ dtmf-relay rtp-nte
+ codec g711alaw
+ no vad
+!
+dial-peer voice 10 pots
+ port 0/1/0:15
+!
+dial-peer voice 39790423 pots
+ destination-pattern 39790423
+ progress_ind alert enable 8
+ port 0/2/0
+!
+dial-peer voice 9090 pots
+ incoming called-number 39790423
+ direct-inward-dial
+!
+dial-peer voice 123 voip
+ destination-pattern 11111
+ session protocol sipv2
+ session target ipv4:10.124.42.10
+ voice-class sip options-ping 60
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 49 voip
+ destination-pattern 39790403
+ session protocol sipv2
+ session target ipv4:10.124.56.219
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 50 pots
+ destination-pattern 10086
+ port 0/1/0:15
+ forward-digits all
+!
+dial-peer voice 51 voip
+ session protocol sipv2
+ incoming called-number 910086
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 52 pots
+ destination-pattern 13252941843
+ port 0/1/0:15
+ forward-digits all
+!
+dial-peer voice 53 voip
+ session protocol sipv2
+ incoming called-number 13252941843
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 54 voip
+ session protocol sipv2
+ incoming called-number 10086
+ dtmf-relay sip-kpml
+ codec g711ulaw
+!
+dial-peer voice 906789 voip
+ session protocol sipv2
+ incoming called-number 906789
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+dial-peer voice 67890 voip
+ translation-profile outgoing 6789
+ destination-pattern 906789
+ session protocol sipv2
+ session target ipv4:10.124.144.57
+ dtmf-relay rtp-nte
+ codec g711ulaw
+!
+!
+gateway 
+ media-inactivity-criteria all
+ timer receive-rtcp 10
+ timer receive-rtp 1200
+!
+sip-ua 
+ retry invite 3
+ connection-reuse
+!
+!
+ephone-dn  1
+ number 2009
+!
+!
+ephone  1
+ device-security-mode none
+ mac-address 48A4.72E9.2BC6
+ button  1:1
+!
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ privilege level 15
+ password zxciop_2015
+ no login
+ transport input all
+!
+network-clock synchronization automatic
+no network-clock synchronization participate 0/1
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+!
+!
+!
+!
+!
+!
+end
