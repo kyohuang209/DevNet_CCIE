@@ -1,0 +1,18 @@
+
+        <config>
+            <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                <interface>
+                    <{int_type}>
+                        <name>{int_name}</name>
+                        <ip>
+                            <address>
+                                <primary>
+                                    <address>{int_ip}</address>
+                                    <mask>{int_netmask}</mask>
+                                </primary>
+                            </address>
+                        </ip>
+                    </{int_type}>
+                </interface>
+            </native>
+        </config>

@@ -1,0 +1,13 @@
+[switch_cisco]
+cisco_3560_01  ansible_host=192.168.1.84
+cisco_3560_02  ansible_host=192.168.1.85
+
+[juniper]
+
+
+[switch_cisco:vars]
+ansible_connection = network_cli
+ansible_network_os = ios
+ansible_ssh_port = 22
+ansible_ssh_user = admin
+ansible_ssh_pass = cisco123

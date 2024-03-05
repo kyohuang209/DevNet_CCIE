@@ -1,0 +1,11 @@
+<router vendor = 'cisco'>
+    <name>route01</name>
+    <interfaces>
+        <interface>
+            <name>GigabitEthernet0/0</name>
+        </interface>
+        <interface>
+            <name>GigabitEthernet0/1</name>
+        </interface>
+    </interfaces>
+</router>
