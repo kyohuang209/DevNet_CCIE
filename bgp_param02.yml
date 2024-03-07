@@ -1,0 +1,14 @@
+---
+BGP:
+  ASN: "65008"
+  networks:
+    - network_int: "172.16.2.1"
+      mask_int: '255.255.255.0'
+      network_ext: '192.168.2.1'
+      mask_ext: "255.255.255.0"
+  peers:
+    - neighbor: "172.16.22.1"
+      peer_ASN: "65009"
+  redistribute:
+    - protocol: "ospf"
+      process_id: "200"

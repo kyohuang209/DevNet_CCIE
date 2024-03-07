@@ -1,0 +1,10 @@
+{% for host in disallowed -%}
+    access-list 20 deny host {{host}}
+{% endfor -%}
+
+{% for host in allowed -%}
+    access-list 20 permit host {{host}}
+{% endfor -%}
+
+line vty 0 4
+    access-list 20 
