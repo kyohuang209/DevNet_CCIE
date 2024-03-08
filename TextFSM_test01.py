@@ -24,3 +24,4 @@ print(type(interfaces))
 
 for i in interfaces:
     print(i)
+    print(f"Now the interface {i[0]}, and the ip address is {i[1]}, and the status of this interface is {i[2]}/{i[3]}")
