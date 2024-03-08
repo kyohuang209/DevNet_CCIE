@@ -1,0 +1,11 @@
+{% for port in ports -%}
+interface {{port["type"]}} {{port["slot"]}}/{{port["number"]}}
+{% if port['int_type'] == "access" -%}
+    switchport mode {{port['int_type']}}
+    switchport access vlan {{port['vlan']}}
+{% endif -%}
+{% if port['int_type'] == "trunk" -%}
+    switchport mode {{port['int_type']}}
+    switchport trunk allowed vlan {{port['vlan']}}
+{% endif -%}
+{% endfor -%}

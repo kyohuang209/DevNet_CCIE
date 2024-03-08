@@ -1,0 +1,16 @@
+router bgp {{BGP.ASN}}
+ bgp log-neighbor-changes
+ {% for nei in BGP.peers -%}
+ neighbor {{ nei.neighbor }} remote-as {{ nei.peer_ASN }}
+ {% endfor -%}
+ !
+ address-family ipv4 unicast
+ synchronization
+  {% for net in BGP.networks -%}
+  network {{ net.network_int }} mask {{ net.mask_int }}
+  network {{ net.network_ext }} mask {{ net.mask_ext }}
+  {% endfor -%}
+  {% for re in BGP.redistribute -%}
+  redistribute {{ re.protocol }} {{ re.process_id }}
+  {% endfor -%}
+  exit
