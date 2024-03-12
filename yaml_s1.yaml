@@ -1,0 +1,15 @@
+device01:
+  ipaddr: 10.124.42.11
+  username: admin
+  psw: cisco.123
+
+device02:
+  ipaddr: 10.124.42.10
+  username: admin
+  psw: cisco.123
+
+ip_list:
+  ipaddress:
+    - 10.1.1.1
+    - 10.1.1.2
+    - 10.1.1.3
